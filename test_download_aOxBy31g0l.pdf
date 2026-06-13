@@ -1,0 +1,496 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+2 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/ExtGState <<
+/gRLs0 <<
+/ca 0.3
+>>
+>>
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 1 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 3715
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT 1 0 0 1 100 750 Tm (Test File for Share Link System) Tj T* ET
+BT 1 0 0 1 100 730 Tm (This is a test PDF file.) Tj T* ET
+BT 1 0 0 1 100 710 Tm (File ID: 1) Tj T* ET
+BT 1 0 0 1 100 690 Tm (If watermark works, you should see) Tj T* ET
+BT 1 0 0 1 100 670 Tm (semi-transparent text overlays.) Tj T* ET
+BT 1 0 0 1 100 650 Tm (Line 1: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 625 Tm (Line 2: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 600 Tm (Line 3: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 575 Tm (Line 4: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 550 Tm (Line 5: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 525 Tm (Line 6: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 500 Tm (Line 7: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 475 Tm (Line 8: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 450 Tm (Line 9: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 425 Tm (Line 10: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 400 Tm (Line 11: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 375 Tm (Line 12: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 350 Tm (Line 13: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 325 Tm (Line 14: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 300 Tm (Line 15: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 275 Tm (Line 16: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 250 Tm (Line 17: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 225 Tm (Line 18: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 200 Tm (Line 19: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 175 Tm (Line 20: Sample content for testing.) Tj T* ET
+ 
+Q
+
+q
+0.0 0.0 595.2756 841.8898 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+0.501961 0.501961 0.501961 rg
+/gRLs0 gs
+BT
+/F1-0 29.76378 Tf
+35.71654 TL
+ET
+q
+0.866025 0.5 -0.5 0.866025 59.52756 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 297.6378 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 0.707107 -0.707107 0.707107 535.748 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 59.52756 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 0.258819 -0.258819 0.965926 297.6378 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 -0.707107 0.707107 0.707107 535.748 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 0.5 -0.5 0.866025 59.52756 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 297.6378 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 0.707107 -0.707107 0.707107 535.748 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 59.52756 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 0.258819 -0.258819 0.965926 297.6378 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 -0.707107 0.707107 0.707107 535.748 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 118.6082 275.4535 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 475.2061 524.3437 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+Q
+
+
+endstream
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000074 00000 n 
+0000000113 00000 n 
+0000000162 00000 n 
+0000000433 00000 n 
+0000004200 00000 n 
+0000004307 00000 n 
+trailer
+<<
+/Size 8
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+4414
+%%EOF
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+2 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/ExtGState <<
+/gRLs0 <<
+/ca 0.3
+>>
+>>
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 1 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 3715
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT 1 0 0 1 100 750 Tm (Test File for Share Link System) Tj T* ET
+BT 1 0 0 1 100 730 Tm (This is a test PDF file.) Tj T* ET
+BT 1 0 0 1 100 710 Tm (File ID: 1) Tj T* ET
+BT 1 0 0 1 100 690 Tm (If watermark works, you should see) Tj T* ET
+BT 1 0 0 1 100 670 Tm (semi-transparent text overlays.) Tj T* ET
+BT 1 0 0 1 100 650 Tm (Line 1: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 625 Tm (Line 2: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 600 Tm (Line 3: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 575 Tm (Line 4: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 550 Tm (Line 5: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 525 Tm (Line 6: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 500 Tm (Line 7: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 475 Tm (Line 8: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 450 Tm (Line 9: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 425 Tm (Line 10: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 400 Tm (Line 11: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 375 Tm (Line 12: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 350 Tm (Line 13: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 325 Tm (Line 14: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 300 Tm (Line 15: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 275 Tm (Line 16: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 250 Tm (Line 17: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 225 Tm (Line 18: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 200 Tm (Line 19: Sample content for testing.) Tj T* ET
+BT 1 0 0 1 100 175 Tm (Line 20: Sample content for testing.) Tj T* ET
+ 
+Q
+
+q
+0.0 0.0 595.2756 841.8898 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+0.501961 0.501961 0.501961 rg
+/gRLs0 gs
+BT
+/F1-0 29.76378 Tf
+35.71654 TL
+ET
+q
+0.866025 0.5 -0.5 0.866025 59.52756 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 297.6378 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 0.707107 -0.707107 0.707107 535.748 84.18898 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 59.52756 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 0.258819 -0.258819 0.965926 297.6378 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 -0.707107 0.707107 0.707107 535.748 308.6929 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 0.5 -0.5 0.866025 59.52756 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 297.6378 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 0.707107 -0.707107 0.707107 535.748 533.1969 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 59.52756 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 0.258819 -0.258819 0.965926 297.6378 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.707107 -0.707107 0.707107 0.707107 535.748 757.7008 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.965926 -0.258819 0.258819 0.965926 118.6082 275.4535 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+q
+0.866025 -0.5 0.5 0.866025 475.2061 524.3437 cm
+BT
+1 0 0 1 -138.1635 0 Tm
+(2026\05506\05513\04000\07207\07256) Tj
+T*
+ET
+Q
+Q
+
+
+endstream
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000074 00000 n 
+0000000113 00000 n 
+0000000162 00000 n 
+0000000433 00000 n 
+0000004200 00000 n 
+0000004307 00000 n 
+trailer
+<<
+/Size 8
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+4414
+%%EOF

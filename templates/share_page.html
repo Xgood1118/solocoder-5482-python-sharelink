@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载 - 文件分享</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+        }
+        .icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        input:focus {
+            border-color: #667eea;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .info-box {
+            background: #f5f7ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #555;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+        .info-label {
+            color: #888;
+        }
+        .info-value {
+            color: #333;
+            font-weight: 500;
+        }
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .success {
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .watermark-badge {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 16px;
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">&#128193;</div>
+        <h1>文件分享下载</h1>
+        <p class="subtitle">
+            {% if file_count > 1 %}
+                共 {{ file_count }} 个文件
+            {% else %}
+                1 个文件
+            {% endif %}
+            {% if watermark %}
+                <span class="watermark-badge">含水印</span>
+            {% endif %}
+        </p>
+
+        <div class="info-box">
+            {% if expires_at %}
+            <div class="info-item">
+                <span class="info-label">过期时间</span>
+                <span class="info-value" id="expires-at"></span>
+            </div>
+            {% endif %}
+            {% if max_downloads %}
+            <div class="info-item">
+                <span class="info-label">剩余下载次数</span>
+                <span class="info-value">{{ max_downloads - download_count }} / {{ max_downloads }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="error" id="error-box"></div>
+        <div class="success" id="success-box"></div>
+
+        {% if needs_password or needs_email %}
+        <form id="download-form">
+            {% if needs_email %}
+            <div class="form-group">
+                <label for="email">邮箱地址</label>
+                <input type="email" id="email" name="email" placeholder="请输入您的邮箱" required>
+            </div>
+            {% endif %}
+            {% if needs_password %}
+            <div class="form-group">
+                <label for="password">访问密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码" required>
+            </div>
+            {% endif %}
+            <button type="submit" class="btn" id="download-btn">下载文件</button>
+        </form>
+        {% else %}
+        <button class="btn" id="direct-download-btn">立即下载</button>
+        {% endif %}
+
+        <div class="loading" id="loading">
+            <span class="spinner"></span>
+            正在准备下载...
+        </div>
+    </div>
+
+    <script>
+        var shareId = "{{ share_id }}";
+        var needsPassword = {{ needs_password|tojson }};
+        var needsEmail = {{ needs_email|tojson }};
+
+        function formatTimestamp(ts) {
+            var date = new Date(ts * 1000);
+            return date.getFullYear() + "-" +
+                String(date.getMonth() + 1).padStart(2, "0") + "-" +
+                String(date.getDate()).padStart(2, "0") + " " +
+                String(date.getHours()).padStart(2, "0") + ":" +
+                String(date.getMinutes()).padStart(2, "0");
+        }
+
+        {% if expires_at %}
+        document.getElementById("expires-at").textContent = formatTimestamp({{ expires_at }});
+        {% endif %}
+
+        function showError(msg) {
+            var box = document.getElementById("error-box");
+            box.textContent = msg;
+            box.style.display = "block";
+            document.getElementById("success-box").style.display = "none";
+        }
+
+        function showSuccess(msg) {
+            var box = document.getElementById("success-box");
+            box.textContent = msg;
+            box.style.display = "block";
+            document.getElementById("error-box").style.display = "none";
+        }
+
+        function showLoading(show) {
+            document.getElementById("loading").style.display = show ? "block" : "none";
+            var btn = document.getElementById("download-btn") || document.getElementById("direct-download-btn");
+            if (btn) btn.disabled = show;
+        }
+
+        function verifyAndDownload() {
+            var data = {};
+            if (needsPassword) {
+                data.password = document.getElementById("password").value;
+            }
+            if (needsEmail) {
+                data.email = document.getElementById("email").value;
+            }
+
+            showLoading(true);
+
+            fetch("/s/" + shareId + "/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(result) {
+                if (result.download_url) {
+                    showSuccess("验证成功，开始下载...");
+                    window.location.href = result.download_url;
+                } else if (result.error) {
+                    showError(result.error);
+                    showLoading(false);
+                }
+            })
+            .catch(function(err) {
+                showError("请求失败，请稍后重试");
+                showLoading(false);
+            });
+        }
+
+        var form = document.getElementById("download-form");
+        if (form) {
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                verifyAndDownload();
+            });
+        }
+
+        var directBtn = document.getElementById("direct-download-btn");
+        if (directBtn) {
+            directBtn.addEventListener("click", function() {
+                showLoading(true);
+                window.location.href = "/s/" + shareId + "/download";
+            });
+        }
+    </script>
+</body>
+</html>
