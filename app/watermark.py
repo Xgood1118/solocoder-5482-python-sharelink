@@ -286,26 +286,43 @@ class WatermarkService:
             return data_stream(), output_filename
 
     def get_file_path(self, file_id: str) -> str:
-        storage_path = Config.FILE_STORAGE_PATH
-        direct_path = os.path.join(storage_path, str(file_id))
-        if os.path.exists(direct_path) and os.path.isfile(direct_path):
-            return direct_path
+        storage_path = os.path.realpath(Config.FILE_STORAGE_PATH)
+        safe_file_id = os.path.basename(str(file_id))
+        if not safe_file_id or safe_file_id in (".", ".."):
+            return os.path.join(storage_path, "__invalid__")
+
+        direct_path = os.path.join(storage_path, safe_file_id)
+        real_direct = os.path.realpath(direct_path)
+        if os.path.commonpath([storage_path, real_direct]) != storage_path:
+            return os.path.join(storage_path, "__invalid__")
+        if os.path.exists(real_direct) and os.path.isfile(real_direct):
+            return real_direct
 
         for ext in Config.ALLOWED_PDF_EXTENSIONS | Config.ALLOWED_IMAGE_EXTENSIONS | Config.ALLOWED_OFFICE_EXTENSIONS:
-            candidate = os.path.join(storage_path, str(file_id) + ext)
-            if os.path.exists(candidate):
-                return candidate
+            candidate = os.path.join(storage_path, safe_file_id + ext)
+            real_candidate = os.path.realpath(candidate)
+            if os.path.commonpath([storage_path, real_candidate]) != storage_path:
+                continue
+            if os.path.exists(real_candidate):
+                return real_candidate
 
         return direct_path
 
     def file_exists(self, file_id: str) -> bool:
-        return os.path.exists(self.get_file_path(file_id))
+        file_path = self.get_file_path(file_id)
+        storage_path = os.path.realpath(Config.FILE_STORAGE_PATH)
+        if os.path.commonpath([storage_path, os.path.realpath(file_path)]) != storage_path:
+            return False
+        return os.path.exists(file_path) and os.path.isfile(file_path)
 
     def get_original_filename(self, file_id: str) -> str:
         file_path = self.get_file_path(file_id)
-        if os.path.exists(file_path):
-            return os.path.basename(file_path)
-        return str(file_id)
+        storage_path = os.path.realpath(Config.FILE_STORAGE_PATH)
+        if os.path.commonpath([storage_path, os.path.realpath(file_path)]) == storage_path:
+            if os.path.exists(file_path):
+                return os.path.basename(file_path)
+        safe_file_id = os.path.basename(str(file_id))
+        return safe_file_id
 
 
 watermark_service = WatermarkService()

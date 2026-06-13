@@ -44,6 +44,8 @@ def create_share():
         file_ids = [str(fid) for fid in file_ids]
 
     for fid in file_ids:
+        if "/" in fid or "\\" in fid or ".." in fid:
+            return jsonify({"error": "Invalid file_id"}), 400
         if not watermark_service.file_exists(fid):
             return jsonify({"error": f"File {fid} not found"}), 404
 
@@ -56,17 +58,36 @@ def create_share():
     max_concurrent_per_ip = data.get("max_concurrent_per_ip", Config.DEFAULT_MAX_CONCURRENT_PER_IP)
     download_speed_kbps = data.get("download_speed_kbps", Config.DEFAULT_DOWNLOAD_SPEED_KBPS)
 
-    share = share_manager.create_share(
-        file_ids=file_ids,
-        password=password,
-        expires_in=expires_in,
-        max_downloads=max_downloads,
-        created_by=created_by,
-        allowed_emails=allowed_emails,
-        watermark=watermark,
-        max_concurrent_per_ip=max_concurrent_per_ip,
-        download_speed_kbps=download_speed_kbps,
-    )
+    if expires_in is not None:
+        try:
+            expires_in = int(expires_in)
+            if expires_in <= 0:
+                return jsonify({"error": "expires_in must be a positive integer (seconds)"}), 400
+        except (ValueError, TypeError):
+            return jsonify({"error": "expires_in must be a valid integer"}), 400
+
+    if max_downloads is not None:
+        try:
+            max_downloads = int(max_downloads)
+            if max_downloads <= 0:
+                return jsonify({"error": "max_downloads must be a positive integer"}), 400
+        except (ValueError, TypeError):
+            return jsonify({"error": "max_downloads must be a valid integer"}), 400
+
+    try:
+        share = share_manager.create_share(
+            file_ids=file_ids,
+            password=password,
+            expires_in=expires_in,
+            max_downloads=max_downloads,
+            created_by=created_by,
+            allowed_emails=allowed_emails,
+            watermark=watermark,
+            max_concurrent_per_ip=max_concurrent_per_ip,
+            download_speed_kbps=download_speed_kbps,
+        )
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
 
     share_url = f"{request.scheme}://{request.host}/s/{share.share_id}"
 
@@ -242,11 +263,16 @@ def download_share(share_id):
         access_controller.log_access(ip, ua, share_id, success=False, failure_reason="ip_banned")
         return "访问过于频繁，请稍后再试", 429
 
-    share = share_manager.get_share(share_id)
+    share = share_manager.get_share_include_archived(share_id)
     if not share:
         access_controller.rate_limiter.record_failed_attempt(ip)
-        access_controller.log_access(ip, ua, share_id, success=False, failure_reason="share_expired")
+        access_controller.log_access(ip, ua, share_id, success=False, failure_reason="share_not_found")
         return "分享链接已过期或不存在", 410
+
+    if share.archived or share.is_expired():
+        access_controller.rate_limiter.record_failed_attempt(ip)
+        access_controller.log_access(ip, ua, share_id, success=False, failure_reason="share_expired")
+        return "分享链接已过期或下载次数已用完", 410
 
     verified_shares = session.get("verified_shares", {})
     share_verified = share_id in verified_shares
@@ -267,9 +293,13 @@ def download_share(share_id):
         access_controller.log_access(ip, ua, share_id, email=email, success=False, failure_reason="too_many_concurrent")
         return "下载并发数超限，请稍后再试", 429
 
-    try:
-        share_manager.increment_download(share_id)
+    acquired = share_manager.try_acquire_download(share_id)
+    if not acquired:
+        access_controller.release_download_slot(share_id, ip)
+        access_controller.log_access(ip, ua, share_id, email=email, success=False, failure_reason="max_downloads_reached")
+        return "分享链接已过期或下载次数已用完", 410
 
+    try:
         token_bucket = access_controller.get_token_bucket(share_id, ip, share.download_speed_kbps)
 
         file_ids = share.file_ids
@@ -280,6 +310,9 @@ def download_share(share_id):
         else:
             return _download_zip_files(share, file_ids, use_watermark, email, ip, ua, token_bucket)
 
+    except Exception:
+        share_manager.decrement_download(share_id)
+        raise
     finally:
         access_controller.release_download_slot(share_id, ip)
 

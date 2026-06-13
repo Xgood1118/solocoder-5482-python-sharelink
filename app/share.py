@@ -132,6 +132,17 @@ class ShareManager:
         max_concurrent_per_ip: int = Config.DEFAULT_MAX_CONCURRENT_PER_IP,
         download_speed_kbps: int = Config.DEFAULT_DOWNLOAD_SPEED_KBPS,
     ) -> Share:
+        if not file_ids:
+            raise ValueError("file_ids cannot be empty")
+        if expires_in is not None and expires_in <= 0:
+            raise ValueError("expires_in must be a positive integer")
+        if max_downloads is not None and max_downloads <= 0:
+            raise ValueError("max_downloads must be a positive integer")
+        if max_concurrent_per_ip <= 0:
+            raise ValueError("max_concurrent_per_ip must be a positive integer")
+        if download_speed_kbps <= 0:
+            raise ValueError("download_speed_kbps must be a positive integer")
+
         with self._lock:
             while True:
                 share_id = nanoid_generate(size=Config.NANOID_LENGTH)
@@ -167,7 +178,11 @@ class ShareManager:
 
     def get_share(self, share_id: str) -> Optional[Share]:
         share = self._shares.get(share_id)
-        if share and not share.archived and share.is_expired():
+        if not share:
+            return None
+        if share.archived:
+            return None
+        if share.is_expired():
             self._archive_share(share_id)
             return None
         return share
@@ -182,6 +197,28 @@ class ShareManager:
                 share.download_count += 1
                 if share.max_downloads and share.download_count >= share.max_downloads:
                     self._archive_share(share_id)
+
+    def try_acquire_download(self, share_id: str) -> bool:
+        with self._lock:
+            share = self._shares.get(share_id)
+            if not share or share.archived:
+                return False
+            if share.is_expired():
+                return False
+            if share.max_downloads and share.download_count >= share.max_downloads:
+                return False
+            share.download_count += 1
+            if share.max_downloads and share.download_count >= share.max_downloads:
+                self._archive_share(share_id)
+            return True
+
+    def decrement_download(self, share_id: str):
+        with self._lock:
+            share = self._shares.get(share_id)
+            if share and share.download_count > 0:
+                share.download_count -= 1
+                if share.archived and share.is_expired() == False:
+                    share.archived = False
 
     def _archive_share(self, share_id: str):
         share = self._shares.get(share_id)
